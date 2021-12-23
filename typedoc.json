@@ -1,0 +1,7 @@
+{
+  "entryPoints": ["src"],
+  "out": "docs",
+  "name": "SyncConnect SDK",
+  "tsconfig": "./tsconfig.json",
+  "entryPointStrategy": "expand"
+}

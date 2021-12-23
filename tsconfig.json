@@ -1,0 +1,27 @@
+{
+  "buildOnSave": false,
+  "compileOnSave": true,
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist/",
+    "allowJs": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "importHelpers": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "lib": ["es2020"],
+    "moduleResolution": "node",
+    "noUnusedParameters": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "noUnusedLocals": false, // temp
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
+  "exclude": ["node_modules", ".vscode", "examples", "docs", ".github", "dist"]
+}
