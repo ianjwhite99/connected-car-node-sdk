@@ -1,6 +1,6 @@
-![Connected Car Node SDK Logo](https://user-images.githubusercontent.com/35158392/147300580-29723aab-ffae-46d3-ae60-72af59065daa.png)
+![ConnectedCar Node SDK Logo](https://user-images.githubusercontent.com/35158392/147300580-29723aab-ffae-46d3-ae60-72af59065daa.png)
 
-The Connected Car JavaScript SDK is an open-source, python package that provides the ability to send commands to your Ford Sync Connect (Ford Pass) connected vehicle.
+The ConnectedCar JavaScript SDK is an open-source, python package that provides the ability to send commands to your Ford Sync Connect (Ford Pass) connected vehicle.
 
 # Installation
 ```sh
@@ -11,14 +11,14 @@ Requirements
 - To make requests to a vehicle, the end user must have signed up for an account using [Ford Pass](https://owner.ford.com/fordpass/fordpass-sync-connect.html). These credentials will be used to authenticate your requests.
 # Getting Started
 
-Import the Connected Car SDK
+Import the ConnectedCar SDK
 ```javascript
 import connectedcar from 'connected-car'
 ```
 
 
 Create a new connectedcar `client`
-- Note the default Connected Car client_id is 
+- Note the default ConnectedCar client_id is 
 `9fb503e0-715b-47e8-adfd-ad4b7770f73b`
 
 ```javascript
@@ -63,7 +63,7 @@ await currentVehicle.start()
 ```
 
 # Examples & Documentation
-For more examples on what you can do with your Connected Car, see the [examples](/examples) folder or take a peek at the [documentation](https://ianjwhite99.github.io/sync-connect-node-sdk/).
+For more examples on what you can do with your ConnectedCar, see the [examples](/examples) folder or take a peek at the [documentation](https://ianjwhite99.github.io/sync-connect-node-sdk/).
 
 # Funding & Support
 If you are interested in supporting the development of my projects check out my [patreon](https://www.patreon.com/ianjwhite99) or [buy me a coffee](https://www.buymeacoffee.com/ianjwhite9). 
