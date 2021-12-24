@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {URLSearchParams} from 'url';
-import {SyncException} from '../Exceptions/SyncException';
+import {ConnectedCarException} from '../Exceptions/ConnectedCarException';
 import {AccessToken} from './AccessToken';
 
 export interface OAuthRequestInterface {
@@ -89,7 +89,7 @@ export class OAuth2Client {
         let message = err.message;
         if (err.response.data.status) status = err.response.data.status;
         if (err.response.data.message) message = err.response.data.message;
-        throw new SyncException(status, message);
+        throw new ConnectedCarException(status, message);
       });
     return accessToken;
   }

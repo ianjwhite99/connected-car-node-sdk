@@ -1,8 +1,8 @@
-import SyncConnect from '../src';
+import ConnectedCar from '../src';
 
 const main = async (): Promise<void> => {
-  // Establish SyncConnect AuthClient
-  const client = SyncConnect.AuthClient('9fb503e0-715b-47e8-adfd-ad4b7770f73b');
+  // Establish ConnectedCar AuthClient
+  const client = ConnectedCar.AuthClient('9fb503e0-715b-47e8-adfd-ad4b7770f73b');
 
   const username = '<username>';
   const password = '<password>';
@@ -15,11 +15,11 @@ const main = async (): Promise<void> => {
   });
 
   if (token) {
-    const user = SyncConnect.User(token.getValue()); // Create SyncConnect User
+    const user = ConnectedCar.User(token.getValue()); // Create ConnectedCar User
     await user.addVehicle(vin); // Add vehicle to user account
     console.log(`Successfully added vehicle to user account`);
 
-    const vehicle = SyncConnect.Vehicle(vin, token.getValue()); // Create SyncConnect Vehicle
+    const vehicle = ConnectedCar.Vehicle(vin, token.getValue()); // Create ConnectedCar Vehicle
     await vehicle.sendAuthorization(); // Send authorization request to vehicle
     console.log(`Successfully sent authorization request to vehicle`);
 

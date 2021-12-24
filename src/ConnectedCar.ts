@@ -3,9 +3,9 @@ import {Vehicle} from './Vehicle/Vehicle';
 import {User} from './User/User';
 
 /**
- * @class SyncConnect
+ * @class ConnectedCar
  */
-export class SyncConnect {
+export class ConnectedCar {
   /**
    * Creates a new OAuth2Client object with the given client id.
    * @param clientId
