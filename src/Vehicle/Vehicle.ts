@@ -1,6 +1,6 @@
 import {AxiosResponse} from 'axios';
 import {Api} from '../Api/Api';
-import {SyncException} from '../Exceptions/SyncException';
+import {ConnectedCarException} from '../Exceptions/ConnectedCarException';
 
 /**
  * @class Vehicle
@@ -235,7 +235,7 @@ export class Vehicle extends Api {
       )
         .then(async res => {
           if (res.commandId) return await this.checkVehicleStatus(context, res.commandId);
-          throw new SyncException(404, 'Vehicle commandId not found');
+          throw new ConnectedCarException(404, 'Vehicle commandId not found');
         })
         .catch(err => {
           throw err;
@@ -246,7 +246,7 @@ export class Vehicle extends Api {
       )
         .then(async res => {
           if (res.commandId) return await this.checkVehicleStatus(context, res.commandId);
-          throw new SyncException(404, 'Vehicle commandId not found');
+          throw new ConnectedCarException(404, 'Vehicle commandId not found');
         })
         .catch(err => {
           throw err;
@@ -279,10 +279,10 @@ export class Vehicle extends Api {
           await new Promise(resolve => setTimeout(resolve, 1000));
           attempts += 1;
           if (attempts >= 30) {
-            throw new SyncException(408, 'Vehicle action timed out');
+            throw new ConnectedCarException(408, 'Vehicle action timed out');
           }
         })
-        .catch((err: SyncException) => {
+        .catch((err: ConnectedCarException) => {
           if (err.SyncErrorStatus === 502) {
             // If the status is 502, the action is still in progress
           } else throw err;

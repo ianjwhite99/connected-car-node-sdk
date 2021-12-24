@@ -1,3 +1,3 @@
-import {SyncConnect} from './SyncConnect';
+import {ConnectedCar} from './ConnectedCar';
 
-export = SyncConnect;
+export = ConnectedCar;
