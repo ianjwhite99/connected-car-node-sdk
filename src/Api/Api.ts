@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {SyncException} from '../Exceptions/SyncException';
+import {ConnectedCarException} from '../Exceptions/ConnectedCarException';
 
 /**
  * @class Api
@@ -28,7 +28,7 @@ export class Api {
         let message = err.message;
         if (err.response.data.status) status = err.response.data.status;
         if (err.response.data.message) message = err.response.data.message;
-        throw new SyncException(status, message);
+        throw new ConnectedCarException(status, message);
       });
   }
 
@@ -41,7 +41,7 @@ export class Api {
         let message = err.message;
         if (err.response.data.status) status = err.response.data.status;
         if (err.response.data.message) message = err.response.data.message;
-        throw new SyncException(status, message);
+        throw new ConnectedCarException(status, message);
       });
   }
 
@@ -54,7 +54,7 @@ export class Api {
         let message = err.message;
         if (err.response.data.status) status = err.response.data.status;
         if (err.response.data.message) message = err.response.data.message;
-        throw new SyncException(status, message);
+        throw new ConnectedCarException(status, message);
       });
   }
 
@@ -67,7 +67,7 @@ export class Api {
         let message = err.message;
         if (err.response.data.status) status = err.response.data.status;
         if (err.response.data.message) message = err.response.data.message;
-        throw new SyncException(status, message);
+        throw new ConnectedCarException(status, message);
       });
   }
 }

@@ -1,7 +1,7 @@
 {
   "entryPoints": ["src"],
   "out": "docs",
-  "name": "SyncConnect SDK",
+  "name": "ConnectedCar SDK",
   "tsconfig": "./tsconfig.json",
   "entryPointStrategy": "expand"
 }

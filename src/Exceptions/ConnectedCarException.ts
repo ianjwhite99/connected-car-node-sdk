@@ -2,7 +2,7 @@
  * @class SyncException
  * @extends Error
  */
-export class SyncException extends Error {
+export class ConnectedCarException extends Error {
   public SyncErrorStatus: number;
 
   public SyncErrorMessage: string;

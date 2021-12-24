@@ -1,6 +1,6 @@
 {
-  "name": "syncconnect",
-  "version": "0.4.0",
+  "name": "connected-car",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -15,7 +15,7 @@
     "docs": "typedoc",
     "semantic-release": "semantic-release"
   },
-  "repository": "https://github.com/ianjwhite99/sync-connect-node-sdk.git",
+  "repository": "https://github.com/ianjwhite99/connected-car-node-sdk.git",
   "author": "Ian White <iwhite99@protonmail.com>",
   "license": "MIT",
   "devDependencies": {
