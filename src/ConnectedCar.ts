@@ -21,7 +21,7 @@ export class ConnectedCar {
    * @param accessToken
    * @returns Vehicle
    */
-  public static Vehicle(vehicleVIN: string, accessToken: string, region: string): Vehicle {
+  public static Vehicle(vehicleVIN: string, accessToken: string, region = 'US'): Vehicle {
     return new Vehicle(vehicleVIN, accessToken, region);
   }
 
@@ -30,7 +30,7 @@ export class ConnectedCar {
    * @param accessToken
    * @returns User
    */
-  public static User(accessToken: string, region: string): User {
+  public static User(accessToken: string, region = 'US'): User {
     return new User(accessToken, region);
   }
 }
