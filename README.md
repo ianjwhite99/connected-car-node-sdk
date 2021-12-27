@@ -15,6 +15,8 @@ Requirements
   [Ford Pass](https://owner.ford.com/fordpass/fordpass-sync-connect.html). These credentials will be
   used to authenticate your requests.
 
+<br></br>
+
 # Getting Started
 
 Import the ConnectedCar SDK
@@ -23,7 +25,7 @@ Import the ConnectedCar SDK
 import connectedcar from 'connected-car';
 ```
 
-Create a new connectedcar `client`
+<br></br> Create a new connectedcar `client`
 
 - Note the default ConnectedCar client_id is `9fb503e0-715b-47e8-adfd-ad4b7770f73b`
 
@@ -31,33 +33,36 @@ Create a new connectedcar `client`
 const client = connectedcar.AuthClient('9fb503e0-715b-47e8-adfd-ad4b7770f73b');
 ```
 
-Use `client.getAccessTokenFromCredentials()` to exchange your user credentials for an **access token
-object**. To make any vehicle data request to the Ford Sync Connect API, you'll need to give the SDK
-a valid **access token**.
+<br></br> Use `client.getAccessTokenFromCredentials()` to exchange your user credentials for an
+**token object**. To make any vehicle data request to the Ford Sync Connect API, you'll need to give
+the SDK a valid **access token**.
 
 ```javascript
-const accessToken = await client.getAccessTokenFromCredentials({
+const token = await client.getAccessTokenFromCredentials({
   username: '<username>',
   password: '<password>',
 });
 ```
 
-Access tokens will expire every 2 hours, so you'll need to constantly refresh them by calling
-`client.getAccessTokenFromRefreshToken()`
+<br></br> Access tokens will expire every 2 hours, so you'll need to constantly refresh them by
+calling `client.getAccessTokenFromRefreshToken()`
 
 ```javascript
-const refreshToken = await client.getAccessTokenFromRefreshToken(accessToken.getRefreshToken());
+const refreshToken = await client.getAccessTokenFromRefreshToken(token.getRefreshToken());
 ```
 
-With your access token in hand, use `connectedcar.User()` to get a User object representing the
-user.
+<br></br> With your access token in hand, use `connectedcar.User()` to get a User object
+representing the user.
 
 ```javascript
-const user = connectedcar.User(accessToken.getValue());
+const user = connectedcar.User(token.getValue(), 'US'); // Region argument is only required if you live outside the United States.
 ```
 
-Use `user.vehicles()` to return an array of all the vehicles associated with a users account. The
-response will include the **vehicle vin**.
+- Note: If your region is outside of the US you can pass different region parameters to the User
+  class. Regions: (US, CA, EU, AU)
+
+<br></br> Use `user.vehicles()` to return an array of all the vehicles associated with a users
+account. The response will include the **vehicle vin**.
 
 ```javascript
 const vehicles = await user.vehicles();
@@ -68,29 +73,38 @@ for (userVehicle of vehicles) // For each user vehicle
   vehicleList.push(userVehicle['vin']);
 ```
 
-Now with a **vehicle vin** in hand, use `connectedcar.Vehicle()` to get a Vehicle object
+<br></br> Now with a **vehicle vin** in hand, use `connectedcar.Vehicle()` to get a Vehicle object
 representing the user's vehicle.
 
 ```javascript
-let currentVehicle = connectedcar.Vehicle(vehicleList[0], accessToken.getValue()); // First Vehicle in vehicleList
+let currentVehicle = connectedcar.Vehicle(vehicleList[0], token.getValue(), 'US'); // Region argument is only required if you live outside the United States.
 ```
 
-Now you can ask the car to do things, or ask it for some data! For example:
+- Note: If your region is outside of the US you can pass different region parameters to the Vehicle
+  class. Regions: (US, CA, EU, AU)
+
+<br></br> Now you can ask the car to do things, or ask it for some data! For example:
 
 ```javascript
 await currentVehicle.start();
 ```
+
+<br></br>
 
 # Examples & Documentation
 
 For more examples on what you can do with your ConnectedCar, see the [examples](/examples) folder or
 take a peek at the [documentation](https://ianjwhite99.github.io/connected-car-node-sdk/).
 
+<br></br>
+
 # Funding & Support
 
 If you are interested in supporting the development of my projects check out my
 [patreon](https://www.patreon.com/ianjwhite99) or
 [buy me a coffee](https://www.buymeacoffee.com/ianjwhite9).
+
+<br></br>
 
 # Disclaimer
 

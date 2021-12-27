@@ -9,8 +9,8 @@ import {ConnectedCarException} from '../Exceptions/ConnectedCarException';
 export class Vehicle extends Api {
   private vehicleVIN: string;
 
-  constructor(vehicleVIN: string, accessToken: string) {
-    super(accessToken);
+  constructor(vehicleVIN: string, accessToken: string, region = 'US') {
+    super(accessToken, region);
     this.vehicleVIN = vehicleVIN;
   }
 
