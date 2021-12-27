@@ -13,6 +13,7 @@ commands to your Ford Sync Connect (Ford Pass) connected vehicle.</p>
 <a href="https://owner.ford.com/fordpass/fordpass-sync-connect.html">Ford Pass</a>. These credentials will be
 used to authenticate your requests.</li>
 </ul>
+<p><br></br></p>
 
 <a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
   <h1>Getting Started</h1>
@@ -20,36 +21,45 @@ used to authenticate your requests.</li>
 <p>Import the ConnectedCar SDK</p>
 <pre><code class="language-javascript"><span class="hl-1">import</span><span class="hl-0"> </span><span class="hl-2">connectedcar</span><span class="hl-0"> </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;connected-car&#39;</span><span class="hl-0">;</span>
 </code></pre>
-<p>Create a new connectedcar <code>client</code></p>
+<p><br></br> Create a new connectedcar <code>client</code></p>
 <ul>
 <li>Note the default ConnectedCar client_id is <code>9fb503e0-715b-47e8-adfd-ad4b7770f73b</code></li>
 </ul>
 <pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">client</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">AuthClient</span><span class="hl-0">(</span><span class="hl-3">&#39;9fb503e0-715b-47e8-adfd-ad4b7770f73b&#39;</span><span class="hl-0">);</span>
 </code></pre>
-<p>Use <code>client.getAccessTokenFromCredentials()</code> to exchange your user credentials for an <strong>access token
-object</strong>. To make any vehicle data request to the Ford Sync Connect API, you&#39;ll need to give the SDK
-a valid <strong>access token</strong>.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">accessToken</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccessTokenFromCredentials</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">username:</span><span class="hl-0"> </span><span class="hl-3">&#39;&lt;username&gt;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">password:</span><span class="hl-0"> </span><span class="hl-3">&#39;&lt;password&gt;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
+<p><br></br> Use <code>client.getAccessTokenFromCredentials()</code> to exchange your user credentials for an
+<strong>token object</strong>. To make any vehicle data request to the Ford Sync Connect API, you&#39;ll need to give
+the SDK a valid <strong>access token</strong>.</p>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">token</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccessTokenFromCredentials</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">username:</span><span class="hl-0"> </span><span class="hl-3">&#39;&lt;username&gt;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">password:</span><span class="hl-0"> </span><span class="hl-3">&#39;&lt;password&gt;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
-<p>Access tokens will expire every 2 hours, so you&#39;ll need to constantly refresh them by calling
-<code>client.getAccessTokenFromRefreshToken()</code></p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">refreshToken</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccessTokenFromRefreshToken</span><span class="hl-0">(</span><span class="hl-2">accessToken</span><span class="hl-0">.</span><span class="hl-6">getRefreshToken</span><span class="hl-0">());</span>
+<p><br></br> Access tokens will expire every 2 hours, so you&#39;ll need to constantly refresh them by
+calling <code>client.getAccessTokenFromRefreshToken()</code></p>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">refreshToken</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccessTokenFromRefreshToken</span><span class="hl-0">(</span><span class="hl-2">token</span><span class="hl-0">.</span><span class="hl-6">getRefreshToken</span><span class="hl-0">());</span>
 </code></pre>
-<p>With your access token in hand, use <code>connectedcar.User()</code> to get a User object representing the
-user.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">user</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">User</span><span class="hl-0">(</span><span class="hl-2">accessToken</span><span class="hl-0">.</span><span class="hl-6">getValue</span><span class="hl-0">());</span>
+<p><br></br> With your access token in hand, use <code>connectedcar.User()</code> to get a User object
+representing the user.</p>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">user</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">User</span><span class="hl-0">(</span><span class="hl-2">token</span><span class="hl-0">.</span><span class="hl-6">getValue</span><span class="hl-0">(), </span><span class="hl-3">&#39;US&#39;</span><span class="hl-0">); </span><span class="hl-7">// Region argument is only required if you live outside the United States.</span>
 </code></pre>
-<p>Use <code>user.vehicles()</code> to return an array of all the vehicles associated with a users account. The
-response will include the <strong>vehicle vin</strong>.</p>
+<ul>
+<li>Note: If your region is outside of the US you can pass different region parameters to the User
+class. Regions: (US, CA, EU, AU)</li>
+</ul>
+<p><br></br> Use <code>user.vehicles()</code> to return an array of all the vehicles associated with a users
+account. The response will include the <strong>vehicle vin</strong>.</p>
 <pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">vehicles</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">user</span><span class="hl-0">.</span><span class="hl-6">vehicles</span><span class="hl-0">();</span><br/><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">vehicleList</span><span class="hl-0"> = []; </span><span class="hl-7">// Array of vehicles</span><br/><br/><span class="hl-1">for</span><span class="hl-0"> (</span><span class="hl-2">userVehicle</span><span class="hl-0"> </span><span class="hl-4">of</span><span class="hl-0"> </span><span class="hl-2">vehicles</span><span class="hl-0">) </span><span class="hl-7">// For each user vehicle</span><br/><span class="hl-0">  </span><span class="hl-2">vehicleList</span><span class="hl-0">.</span><span class="hl-6">push</span><span class="hl-0">(</span><span class="hl-2">userVehicle</span><span class="hl-0">[</span><span class="hl-3">&#39;vin&#39;</span><span class="hl-0">]);</span>
 </code></pre>
-<p>Now with a <strong>vehicle vin</strong> in hand, use <code>connectedcar.Vehicle()</code> to get a Vehicle object
+<p><br></br> Now with a <strong>vehicle vin</strong> in hand, use <code>connectedcar.Vehicle()</code> to get a Vehicle object
 representing the user&#39;s vehicle.</p>
-<pre><code class="language-javascript"><span class="hl-4">let</span><span class="hl-0"> </span><span class="hl-2">currentVehicle</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">Vehicle</span><span class="hl-0">(</span><span class="hl-2">vehicleList</span><span class="hl-0">[</span><span class="hl-8">0</span><span class="hl-0">], </span><span class="hl-2">accessToken</span><span class="hl-0">.</span><span class="hl-6">getValue</span><span class="hl-0">()); </span><span class="hl-7">// First Vehicle in vehicleList</span>
+<pre><code class="language-javascript"><span class="hl-4">let</span><span class="hl-0"> </span><span class="hl-2">currentVehicle</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">Vehicle</span><span class="hl-0">(</span><span class="hl-2">vehicleList</span><span class="hl-0">[</span><span class="hl-8">0</span><span class="hl-0">], </span><span class="hl-2">token</span><span class="hl-0">.</span><span class="hl-6">getValue</span><span class="hl-0">(), </span><span class="hl-3">&#39;US&#39;</span><span class="hl-0">); </span><span class="hl-7">// Region argument is only required if you live outside the United States.</span>
 </code></pre>
-<p>Now you can ask the car to do things, or ask it for some data! For example:</p>
+<ul>
+<li>Note: If your region is outside of the US you can pass different region parameters to the Vehicle
+class. Regions: (US, CA, EU, AU)</li>
+</ul>
+<p><br></br> Now you can ask the car to do things, or ask it for some data! For example:</p>
 <pre><code class="language-javascript"><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">currentVehicle</span><span class="hl-0">.</span><span class="hl-6">start</span><span class="hl-0">();</span>
 </code></pre>
+<p><br></br></p>
 
 <a href="#examples-amp-documentation" id="examples-amp-documentation" style="color: inherit; text-decoration: none;">
   <h1>Examples &amp; Documentation</h1>
