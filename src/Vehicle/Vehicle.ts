@@ -79,6 +79,18 @@ export class Vehicle extends Api {
   }
 
   /**
+   * Get vehicle recall status
+   *
+   * Note: Currently only supports the US. Other regions codes are currently unknown.
+   * @returns vehicle recall status
+   */
+  public async recallStatus(): Promise<AxiosResponse['data']> {
+    return this.get(
+      `https://api.mps.ford.com/api/recall/v2/recalls?vin=${this.vehicleVIN}&language=EN&region=US&country=USA`
+    );
+  }
+
+  /**
    * Get vehicle vin
    * @returns vin
    */
