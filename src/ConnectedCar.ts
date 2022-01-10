@@ -2,17 +2,24 @@ import {OAuth2Client} from './Authentication/OAuth2Client';
 import {Vehicle} from './Vehicle/Vehicle';
 import {User} from './User/User';
 
+export interface RegionInterface {
+  region: 'US' | 'CA' | 'EU' | 'AU';
+}
+
 /**
  * @class ConnectedCar
  */
 export class ConnectedCar {
+  private static region = 'US';
+
   /**
    * Creates a new OAuth2Client object with the given client id.
    * @param clientId
    * @returns OAuth2Client
    */
-  public static AuthClient(clientId: string): OAuth2Client {
-    return new OAuth2Client(clientId);
+  public static AuthClient(clientId: string, region?: RegionInterface): OAuth2Client {
+    if (region) this.region = region.region;
+    return new OAuth2Client(clientId, this.region);
   }
 
   /**
@@ -21,8 +28,8 @@ export class ConnectedCar {
    * @param accessToken
    * @returns Vehicle
    */
-  public static Vehicle(vehicleVIN: string, accessToken: string, region = 'US'): Vehicle {
-    return new Vehicle(vehicleVIN, accessToken, region);
+  public static Vehicle(vehicleVIN: string, accessToken: string): Vehicle {
+    return new Vehicle(vehicleVIN, accessToken, this.region);
   }
 
   /**
@@ -30,7 +37,7 @@ export class ConnectedCar {
    * @param accessToken
    * @returns User
    */
-  public static User(accessToken: string, region = 'US'): User {
-    return new User(accessToken, region);
+  public static User(accessToken: string): User {
+    return new User(accessToken, this.region);
   }
 }
