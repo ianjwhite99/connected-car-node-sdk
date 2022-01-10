@@ -6,7 +6,7 @@ import {AxiosResponse} from 'axios';
  * @extends Api
  */
 export class User extends Api {
-  constructor(accessToken: string, region: string) {
+  constructor(accessToken: string, region = 'US') {
     super(accessToken, region);
   }
 
