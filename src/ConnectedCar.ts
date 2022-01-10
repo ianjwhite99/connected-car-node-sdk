@@ -28,8 +28,10 @@ export class ConnectedCar {
    * @param accessToken
    * @returns Vehicle
    */
-  public static Vehicle(vehicleVIN: string, accessToken: string): Vehicle {
-    return new Vehicle(vehicleVIN, accessToken, this.region);
+  public static Vehicle(vehicleVIN: string, accessToken: string, passedRegion: string): Vehicle {
+    let region = this.region;
+    if (passedRegion) region = passedRegion;
+    return new Vehicle(vehicleVIN, accessToken, region);
   }
 
   /**
@@ -37,7 +39,9 @@ export class ConnectedCar {
    * @param accessToken
    * @returns User
    */
-  public static User(accessToken: string): User {
-    return new User(accessToken, this.region);
+  public static User(accessToken: string, passedRegion: string): User {
+    let region = this.region;
+    if (passedRegion) region = passedRegion;
+    return new User(accessToken, region);
   }
 }
