@@ -20,7 +20,7 @@ export class Vehicle extends Api {
    */
   public async status(): Promise<AxiosResponse['data']> {
     return this.get(
-      `https://usapi.cv.ford.com/api/vehicles/v4/${this.vehicleVIN}/status?lrdt=01-01-1970%2000:00:00`
+      `https://usapi.cv.ford.com/api/vehicles/v5/${this.vehicleVIN}/status`
     );
   }
 
@@ -243,7 +243,7 @@ export class Vehicle extends Api {
   ): Promise<AxiosResponse['data']> {
     if (method === 'PUT') {
       return await this.put(
-        `https://usapi.cv.ford.com/api/vehicles/v2/${this.vehicleVIN}/${context}`
+        `https://usapi.cv.ford.com/api/vehicles/v5/${this.vehicleVIN}/${context}`
       )
         .then(async res => {
           if (res.commandId) return await this.checkVehicleStatus(context, res.commandId);
@@ -254,7 +254,7 @@ export class Vehicle extends Api {
         });
     } else if (method === 'DELETE') {
       return await this.delete(
-        `https://usapi.cv.ford.com/api/vehicles/v2/${this.vehicleVIN}/${context}`
+        `https://usapi.cv.ford.com/api/vehicles/v5/${this.vehicleVIN}/${context}`
       )
         .then(async res => {
           if (res.commandId) return await this.checkVehicleStatus(context, res.commandId);
