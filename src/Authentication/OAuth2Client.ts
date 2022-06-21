@@ -59,7 +59,7 @@ export class OAuth2Client {
   public async getAccessTokenFromRefreshToken(refreshToken: string): Promise<AccessToken> {
     return await axios
       .put(
-        'https://api.mps.ford.com/api/oauth2/v1/refresh',
+        'https://api.mps.ford.com/api/token/v2/cat-with-refresh-token',
         {
           refresh_token: refreshToken,
         },
@@ -101,7 +101,7 @@ export class OAuth2Client {
             Accept: '*/*',
             'Accept-Language': 'en-US',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'User-Agent': 'FordPass/5 CFNetwork/1327.0.4 Darwin/21.2.0',
+            'User-Agent': 'FordPass/5 CFNetwork/1333.0.4 Darwin/21.5.0',
             'Accept-Encoding': 'gzip, deflate, br',
           },
         }
@@ -110,16 +110,16 @@ export class OAuth2Client {
         if (res.status === 200 && res.data.access_token) {
           return await axios
             .put(
-              'https://api.mps.ford.com/api/oauth2/v1/token',
+              'https://api.mps.ford.com/api/token/v2/cat-with-ci-access-token',
               {
-                code: res.data.access_token,
+                ciToken: res.data.access_token,
               },
               {
                 headers: {
                   Accept: '*/*',
                   'Accept-Language': 'en-US',
                   'Content-Type': 'application/json',
-                  'User-Agent': 'FordPass/5 CFNetwork/1327.0.4 Darwin/21.2.0',
+                  'User-Agent': 'FordPass/5 CFNetwork/1333.0.4 Darwin/21.5.0',
                   'Accept-Encoding': 'gzip, deflate, br',
                   'Application-Id': this.region,
                 },
