@@ -51,14 +51,16 @@ export class OAuth2Client {
     const client = wrapper(axios.create({jar}));
     const pkce = pkceChallenge();
 
-    const webSession: {code: string; grantId: string} = await this.initalizeWebSession(client, pkce.code_challenge)
+    const webSession: {code: string; grantId: string} = await this.initalizeWebSession(
+      client,
+      pkce.code_challenge
+    )
       .then(async (authURL: string) => {
-        return this.attemptLogin(authURL, auth, client)
-          .then(async (url: string) => {
-            return this.fetchAuthorizationCode(url, client).then(
-              (data: {code: string; grantId: string}) => data
-            )
-          })
+        return this.attemptLogin(authURL, auth, client).then(async (url: string) => {
+          return this.fetchAuthorizationCode(url, client).then(
+            (data: {code: string; grantId: string}) => data
+          );
+        });
       })
       .catch(err => {
         throw err;
@@ -82,7 +84,10 @@ export class OAuth2Client {
    * @param code_challenge string
    * @returns {<Promise<string>>}
    */
-  private async initalizeWebSession(client: AxiosInstance, code_challenge: string): Promise<string> {
+  private async initalizeWebSession(
+    client: AxiosInstance,
+    code_challenge: string
+  ): Promise<string> {
     return client
       .get(
         `https://sso.ci.ford.com/v1.0/endpoint/default/authorize?redirect_uri=fordapp://userauthorized&response_type=code&scope=openid&max_age=3600&client_id=9fb503e0-715b-47e8-adfd-ad4b7770f73b&code_challenge=${code_challenge}%3D&code_challenge_method=S256`,
@@ -232,7 +237,7 @@ export class OAuth2Client {
         new URLSearchParams(data).toString(),
         {
           headers: {
-             ...this.getDefaultHeaders(),
+            ...this.getDefaultHeaders(),
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         }
@@ -281,6 +286,6 @@ export class OAuth2Client {
       'Accept-Language': 'en-US',
       'User-Agent': 'FordPass/5 CFNetwork/1333.0.4 Darwin/21.5.0',
       'Accept-Encoding': 'gzip, deflate, br',
-    }
+    };
   }
 }
