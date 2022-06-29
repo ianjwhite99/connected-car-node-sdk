@@ -1,13 +1,18 @@
-import axios from 'axios';
 import {URLSearchParams} from 'url';
 import {ConnectedCarException} from '../Exceptions/ConnectedCarException';
 import {AccessToken} from './AccessToken';
+import pkceChallenge from 'pkce-challenge';
+import axios, {AxiosInstance} from 'axios';
+import {wrapper} from 'axios-cookiejar-support';
+import {CookieJar} from 'tough-cookie';
 
 export interface OAuthRequestInterface {
   client_id: string;
   grant_type: string;
-  username?: string;
-  password?: string;
+  code: string;
+  redirect_uri: string;
+  grant_id: string;
+  code_verifier: string;
   refresh_token?: string;
 }
 
@@ -42,13 +47,145 @@ export class OAuth2Client {
    * @returns accessToken
    */
   public async getAccessTokenFromCredentials(auth: AuthInterface): Promise<AccessToken> {
+    const jar = new CookieJar();
+    const client = wrapper(axios.create({jar}));
+    const pkce = pkceChallenge();
+
+    const webSession: {code: string; grantId: string} = await this.initalizeWebSession(client, pkce.code_challenge)
+      .then(async (authURL: string) => {
+        return this.attemptLogin(authURL, auth, client)
+          .then(async (url: string) => {
+            return this.fetchAuthorizationCode(url, client).then(
+              (data: {code: string; grantId: string}) => data
+            )
+          })
+      })
+      .catch(err => {
+        throw err;
+      });
+
     const data: OAuthRequestInterface = {
       client_id: this.clientId,
-      grant_type: 'password',
-      username: auth.username,
-      password: auth.password,
+      grant_type: 'authorization_code',
+      code: webSession.code,
+      redirect_uri: 'fordapp://userauthorized',
+      grant_id: webSession.grantId,
+      code_verifier: pkce.code_verifier,
     };
+
     return await this.requestAccessToken(data);
+  }
+
+  /**
+   * Grab the authorized redirect link from the html page
+   * @param client AxiosInstance
+   * @param code_challenge string
+   * @returns {<Promise<string>>}
+   */
+  private async initalizeWebSession(client: AxiosInstance, code_challenge: string): Promise<string> {
+    return client
+      .get(
+        `https://sso.ci.ford.com/v1.0/endpoint/default/authorize?redirect_uri=fordapp://userauthorized&response_type=code&scope=openid&max_age=3600&client_id=9fb503e0-715b-47e8-adfd-ad4b7770f73b&code_challenge=${code_challenge}%3D&code_challenge_method=S256`,
+        {
+          headers: {
+            ...this.getDefaultHeaders(),
+          },
+        }
+      )
+      .then(async res => {
+        if (res.status === 200) {
+          const authURL =
+            'https://sso.ci.ford.com' +
+            this.findRegexMatch(/data-ibm-login-url="(.*)" /gm, res.data);
+          if (authURL) return authURL;
+          throw new Error('Could not find auth URL');
+        }
+        throw new Error('Initialize WebSession: Unhandled success status code');
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
+
+  /**
+   * Attempt to login and gain authorized redirect URL
+   * @param url string
+   * @param auth AuthInterface
+   * @param client AxiosInstance
+   * @returns {Promise<string>}
+   */
+  private async attemptLogin(
+    url: string,
+    auth: AuthInterface,
+    client: AxiosInstance
+  ): Promise<string> {
+    return client
+      .post(
+        url,
+        new URLSearchParams({
+          operation: 'verify',
+          'login-form-type': 'pwd',
+          username: auth.username,
+          password: auth.password,
+        }).toString(),
+        {
+          maxRedirects: 0,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            ...this.getDefaultHeaders(),
+          },
+        }
+      )
+      .then(() => {
+        throw new Error('Attempt Login: Unhandled success status code');
+      })
+      .catch(err => {
+        if (err.response.status === 302) {
+          return err.response.headers.location;
+        }
+        throw new Error('Attempt Login: Unhandled Error Code');
+      });
+  }
+
+  /**
+   * Fetch Code & Grant ID
+   * @param url string
+   * @param client AxiosInstance
+   * @returns {<Promise<{code: string; grantId: string}>>}
+   */
+  private async fetchAuthorizationCode(
+    url: string,
+    client: AxiosInstance
+  ): Promise<{code: string; grantId: string}> {
+    return client
+      .get(url, {
+        maxRedirects: 0,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          ...this.getDefaultHeaders(),
+        },
+      })
+      .then(() => {
+        throw new Error('Fetch Authorization Code: Unhandled Success Code');
+      })
+      .catch(err => {
+        if (err.response.status === 302) {
+          const code = this.findRegexMatch(/code=(.*)&/gm, err.response.headers.location);
+          const grantId = this.findRegexMatch(/&grant_id=(.*)/gm, err.response.headers.location);
+
+          if (code && grantId) return {code, grantId};
+          throw new Error('Fetch Authorization Code: Missing Code or Grant ID');
+        }
+        throw new Error('Fetch Authorization Code: Unhandled Error Code');
+      });
+  }
+
+  private findRegexMatch(regex: RegExp, html: string): string | undefined {
+    const match = regex.exec(html);
+    if (match) {
+      return match[1];
+    }
+    return undefined;
   }
 
   /**
@@ -65,11 +202,8 @@ export class OAuth2Client {
         },
         {
           headers: {
-            Accept: '*/*',
-            'Accept-Language': 'en-US',
+            ...this.getDefaultHeaders(),
             'Content-Type': 'application/json',
-            'User-Agent': 'FordPass/5 CFNetwork/1327.0.4 Darwin/21.2.0',
-            'Accept-Encoding': 'gzip, deflate, br',
             'Application-Id': this.region,
           },
         }
@@ -98,29 +232,23 @@ export class OAuth2Client {
         new URLSearchParams(data).toString(),
         {
           headers: {
-            Accept: '*/*',
-            'Accept-Language': 'en-US',
+             ...this.getDefaultHeaders(),
             'Content-Type': 'application/x-www-form-urlencoded',
-            'User-Agent': 'FordPass/5 CFNetwork/1333.0.4 Darwin/21.5.0',
-            'Accept-Encoding': 'gzip, deflate, br',
           },
         }
       )
       .then(async res => {
         if (res.status === 200 && res.data.access_token) {
           return await axios
-            .put(
+            .post(
               'https://api.mps.ford.com/api/token/v2/cat-with-ci-access-token',
               {
                 ciToken: res.data.access_token,
               },
               {
                 headers: {
-                  Accept: '*/*',
-                  'Accept-Language': 'en-US',
+                  ...this.getDefaultHeaders(),
                   'Content-Type': 'application/json',
-                  'User-Agent': 'FordPass/5 CFNetwork/1333.0.4 Darwin/21.5.0',
-                  'Accept-Encoding': 'gzip, deflate, br',
                   'Application-Id': this.region,
                 },
               }
@@ -145,5 +273,14 @@ export class OAuth2Client {
         throw new ConnectedCarException(status, message);
       });
     return accessToken;
+  }
+
+  private async getDefaultHeaders(): Promise<{}> {
+    return {
+      Accept: '*/*',
+      'Accept-Language': 'en-US',
+      'User-Agent': 'FordPass/5 CFNetwork/1333.0.4 Darwin/21.5.0',
+      'Accept-Encoding': 'gzip, deflate, br',
+    }
   }
 }
