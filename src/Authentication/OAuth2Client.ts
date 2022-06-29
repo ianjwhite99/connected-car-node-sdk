@@ -200,7 +200,7 @@ export class OAuth2Client {
    */
   public async getAccessTokenFromRefreshToken(refreshToken: string): Promise<AccessToken> {
     return await axios
-      .put(
+      .post(
         'https://api.mps.ford.com/api/token/v2/cat-with-refresh-token',
         {
           refresh_token: refreshToken,
