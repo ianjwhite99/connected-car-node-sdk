@@ -19,9 +19,7 @@ export class Vehicle extends Api {
    * @returns vehicle status
    */
   public async status(): Promise<AxiosResponse['data']> {
-    return this.get(
-      `https://usapi.cv.ford.com/api/vehicles/v5/${this.vehicleVIN}/status`
-    );
+    return this.get(`https://usapi.cv.ford.com/api/vehicles/v5/${this.vehicleVIN}/status`);
   }
 
   /**
@@ -75,7 +73,7 @@ export class Vehicle extends Api {
    * @returns vehicle capabilities
    */
   public async capabilities(): Promise<AxiosResponse['data']> {
-    return this.get(`https://api.mps.ford.com/api/capability/v1/vehicles/${this.vehicleVIN}`);
+    return this.get(`https://api.mps.ford.com/api/capability/v3/vehicles/${this.vehicleVIN}`);
   }
 
   /**
