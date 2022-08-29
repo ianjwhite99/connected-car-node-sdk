@@ -26,7 +26,7 @@ export class Api {
     };
   }
 
-  public async get(url: string): Promise<AxiosResponse['data']> {
+  protected async get(url: string): Promise<AxiosResponse['data']> {
     return await axios
       .get(url, {headers: this.headers})
       .then(res => res.data)
@@ -39,7 +39,7 @@ export class Api {
       });
   }
 
-  public async post(url: string, data: {}): Promise<AxiosResponse['data']> {
+  protected async post(url: string, data: {}): Promise<AxiosResponse['data']> {
     return await axios
       .post(url, data, {headers: this.headers})
       .then(res => res.data)
@@ -52,7 +52,7 @@ export class Api {
       });
   }
 
-  public async put(url: string, data?: {}): Promise<AxiosResponse['data']> {
+  protected async put(url: string, data?: {}): Promise<AxiosResponse['data']> {
     return await axios
       .put(url, data, {headers: this.headers})
       .then(res => res.data)
@@ -65,7 +65,7 @@ export class Api {
       });
   }
 
-  public async delete(url: string): Promise<AxiosResponse['data']> {
+  protected async delete(url: string): Promise<AxiosResponse['data']> {
     return await axios
       .delete(url, {headers: this.headers})
       .then(res => res.data)

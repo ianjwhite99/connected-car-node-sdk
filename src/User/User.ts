@@ -23,9 +23,7 @@ export class User extends Api {
    * @returns
    */
   public async vehicles(): Promise<AxiosResponse['data']> {
-    const vehicleData = await this.get(
-      `https://api.mps.ford.com/api/users/vehicles`
-    );
+    const vehicleData = await this.get(`https://api.mps.ford.com/api/users/vehicles`);
     return vehicleData['vehicles']['$values'];
   }
 
