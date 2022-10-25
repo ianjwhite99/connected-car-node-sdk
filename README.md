@@ -70,7 +70,7 @@ const vehicles = await user.vehicles();
 const vehicleList = []; // Array of vehicles
 
 for (userVehicle of vehicles) // For each user vehicle
-  vehicleList.push(userVehicle['vin']);
+  vehicleList.push(userVehicle['VIN']);
 ```
 
 Now with a **vehicle vin** in hand, use `connectedcar.Vehicle()` to get a Vehicle object

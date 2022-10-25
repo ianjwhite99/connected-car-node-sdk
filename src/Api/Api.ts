@@ -7,12 +7,19 @@ import {ConnectedCarException} from '../Exceptions/ConnectedCarException';
 export class Api {
   private headers: {};
 
-  constructor(accessToken: string, region: string) {
+  constructor(accessToken: string, region: string, locale = 'en-US') {
     const regions = {
       US: '71A3AD0A-CF46-4CCF-B473-FC7FE5BC4592',
       CA: '71A3AD0A-CF46-4CCF-B473-FC7FE5BC4592',
       EU: '1E8C7794-FF5F-49BC-9596-A1E0C86C5B19',
       AU: '5C80A6BB-CF0D-4A30-BDBF-FC804B5C1A98',
+    };
+
+    const countryCode = {
+      US: 'USA',
+      CA: 'CAN',
+      EU: 'EUR',
+      AU: 'AUS',
     };
 
     this.headers = {
@@ -23,6 +30,8 @@ export class Api {
       'Content-Type': 'application/json',
       'Accept-Encoding': 'gzip, deflate, br',
       'Application-Id': regions[region],
+      locale,
+      countryCode: countryCode[region],
     };
   }
 
