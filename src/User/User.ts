@@ -23,8 +23,11 @@ export class User extends Api {
    * @returns
    */
   public async vehicles(): Promise<AxiosResponse['data']> {
-    const vehicleData = await this.get(`https://api.mps.ford.com/api/users/vehicles`);
-    return vehicleData['vehicles']['$values'];
+    const vehicleData = await this.post(`https://api.mps.ford.com/api/expdashboard/v1/details`, {
+      dashboardRefreshRequest: 'All',
+      smsWakeUpVIN: '',
+    });
+    return vehicleData['userVehicles']['vehicleDetails'];
   }
 
   /**
