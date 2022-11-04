@@ -26,7 +26,7 @@ export class Api {
       'auth-token': accessToken,
       Accept: '*/*',
       'Accept-Language': 'en-US',
-      'User-Agent': 'FordPass/5 CFNetwork/1333.0.4 Darwin/21.5.0',
+      'User-Agent': 'FordPass/24 CFNetwork/1399 Darwin/22.1.0',
       'Content-Type': 'application/json',
       'Accept-Encoding': 'gzip, deflate, br',
       'Application-Id': regions[region],

@@ -283,8 +283,8 @@ export class OAuth2Client {
   private async getDefaultHeaders(): Promise<{}> {
     return {
       Accept: '*/*',
-      'Accept-Language': 'en-US',
-      'User-Agent': 'FordPass/5 CFNetwork/1333.0.4 Darwin/21.5.0',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'User-Agent': 'FordPass/24 CFNetwork/1399 Darwin/22.1.0',
       'Accept-Encoding': 'gzip, deflate, br',
     };
   }
