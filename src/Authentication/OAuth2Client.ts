@@ -292,7 +292,7 @@ export class OAuth2Client {
     return {
       Accept: '*/*',
       'Accept-Language': 'en-US,en;q=0.9',
-      'User-Agent': 'FordPass/24 CFNetwork/1399 Darwin/22.1.0',
+      'User-Agent': 'FordPass/1 CFNetwork/1410.0.3 Darwin/22.6.0',
       'Accept-Encoding': 'gzip, deflate, br',
     };
   }
