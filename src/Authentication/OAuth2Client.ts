@@ -214,7 +214,13 @@ export class OAuth2Client {
         }
       )
       .then(res => {
-        return new AccessToken(res.data.access_token, res.data.expires_in, res.data.refresh_token);
+        return new AccessToken(
+          res.data.access_token,
+          res.data.expires_in,
+          res.data.refresh_token,
+          res.data.refresh_expires_in,
+          res.data.ford_consumer_id
+        );
       })
       .catch(err => {
         let status = err.response.status;
@@ -262,7 +268,9 @@ export class OAuth2Client {
               return new AccessToken(
                 res.data.access_token,
                 res.data.expires_in,
-                res.data.refresh_token
+                res.data.refresh_token,
+                res.data.refresh_expires_in,
+                res.data.ford_consumer_id
               );
             })
             .catch(err => {
