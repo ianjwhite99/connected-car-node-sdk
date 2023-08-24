@@ -8,7 +8,13 @@ export class AccessToken {
   private refreshExpiresAt: Date;
   private fordConsumerId: string;
 
-  constructor(accessToken: string, expiresIn: number, refreshToken: string, refreshExpiresIn: number, fordConsumerId: string) {
+  constructor(
+    accessToken: string,
+    expiresIn: number,
+    refreshToken: string,
+    refreshExpiresIn: number,
+    fordConsumerId: string
+  ) {
     this.value = accessToken;
     this.refreshToken = refreshToken;
     this.expiresAt = this.setExpiresAtFromTimeStamp(expiresIn);
