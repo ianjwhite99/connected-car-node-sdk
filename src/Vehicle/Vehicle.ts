@@ -35,7 +35,7 @@ export class Vehicle extends Api {
    * @returns status of authorization request
    */
   public async sendAuthorization(): Promise<AxiosResponse['data']> {
-    return this.post(`https://usapi.cv.ford.com/api/vehicles/v2/${this.vehicleVIN}/drivers`, {});
+    return this.post(`https://usapi.cv.ford.com/api/vehicles/v5/${this.vehicleVIN}/drivers`, {});
   }
 
   /**
@@ -44,7 +44,7 @@ export class Vehicle extends Api {
    */
   public async authorizationStatus(): Promise<AxiosResponse['data']> {
     return this.get(
-      `https://usapi.cv.ford.com/api/vehicles/${this.vehicleVIN}/authstatus?lrdt=01-01-1970%2000:00:00`
+      `https://usapi.cv.ford.com/api/vehicles/v5/${this.vehicleVIN}/authstatus?lrdt=01-01-1970%2000:00:00`
     );
   }
 
@@ -270,7 +270,7 @@ export class Vehicle extends Api {
    * @param commandId
    * @returns vehicle action status
    */
-  public async checkVehicleStatus(
+  private async checkVehicleStatus(
     context: string,
     commandId: string
   ): Promise<AxiosResponse['data']> {

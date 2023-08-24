@@ -1,9 +1,13 @@
-<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ConnectedCar SDK</title><meta name="description" content="Documentation for ConnectedCar SDK"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">ConnectedCar SDK</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1> ConnectedCar SDK</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography"><p><img src="https://user-images.githubusercontent.com/35158392/147300580-29723aab-ffae-46d3-ae60-72af59065daa.png" alt="ConnectedCar Node SDK Logo"></p>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ConnectedCar SDK</title><meta name="description" content="Documentation for ConnectedCar SDK"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">ConnectedCar SDK</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1> ConnectedCar SDK</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#" id="" style="color: inherit; text-decoration: none;">
+  <h1></h1>
+</a>
+<p><img src="https://user-images.githubusercontent.com/35158392/147300580-29723aab-ffae-46d3-ae60-72af59065daa.png" alt="ConnectedCar Node SDK Logo"></p>
 <p>The ConnectedCar JavaScript SDK is an open-source, python package that provides the ability to send
 commands to your Ford Sync Connect (Ford Pass) connected vehicle.</p>
 
 <a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-  <h1>Installation</h1>
+  <h2>Installation</h2>
 </a>
 <pre><code class="language-sh"><span class="hl-0">npm install connected-car</span>
 </code></pre>
@@ -13,69 +17,63 @@ commands to your Ford Sync Connect (Ford Pass) connected vehicle.</p>
 <a href="https://owner.ford.com/fordpass/fordpass-sync-connect.html">Ford Pass</a>. These credentials will be
 used to authenticate your requests.</li>
 </ul>
-<p><br></br></p>
 
 <a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
-  <h1>Getting Started</h1>
+  <h2>Getting Started</h2>
 </a>
 <p>Import the ConnectedCar SDK</p>
 <pre><code class="language-javascript"><span class="hl-1">import</span><span class="hl-0"> </span><span class="hl-2">connectedcar</span><span class="hl-0"> </span><span class="hl-1">from</span><span class="hl-0"> </span><span class="hl-3">&#39;connected-car&#39;</span><span class="hl-0">;</span>
 </code></pre>
-<p><br></br> Create a new connectedcar <code>client</code></p>
+<p>Create a new connectedcar <code>client</code></p>
 <ul>
 <li>Note the default ConnectedCar client_id is <code>9fb503e0-715b-47e8-adfd-ad4b7770f73b</code></li>
 </ul>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">client</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">AuthClient</span><span class="hl-0">(</span><span class="hl-3">&#39;9fb503e0-715b-47e8-adfd-ad4b7770f73b&#39;</span><span class="hl-0">);</span>
-</code></pre>
-<p><br></br> Use <code>client.getAccessTokenFromCredentials()</code> to exchange your user credentials for an
-<strong>token object</strong>. To make any vehicle data request to the Ford Sync Connect API, you&#39;ll need to give
-the SDK a valid <strong>access token</strong>.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">token</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccessTokenFromCredentials</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">username:</span><span class="hl-0"> </span><span class="hl-3">&#39;&lt;username&gt;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">password:</span><span class="hl-0"> </span><span class="hl-3">&#39;&lt;password&gt;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
-</code></pre>
-<p><br></br> Access tokens will expire every 2 hours, so you&#39;ll need to constantly refresh them by
-calling <code>client.getAccessTokenFromRefreshToken()</code></p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">refreshToken</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccessTokenFromRefreshToken</span><span class="hl-0">(</span><span class="hl-2">token</span><span class="hl-0">.</span><span class="hl-6">getRefreshToken</span><span class="hl-0">());</span>
-</code></pre>
-<p><br></br> With your access token in hand, use <code>connectedcar.User()</code> to get a User object
-representing the user.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">user</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">User</span><span class="hl-0">(</span><span class="hl-2">token</span><span class="hl-0">.</span><span class="hl-6">getValue</span><span class="hl-0">(), </span><span class="hl-3">&#39;US&#39;</span><span class="hl-0">); </span><span class="hl-7">// Region argument is only required if you live outside the United States.</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">client</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">AuthClient</span><span class="hl-0">(</span><span class="hl-3">&#39;9fb503e0-715b-47e8-adfd-ad4b7770f73b&#39;</span><span class="hl-0">, {</span><span class="hl-2">region:</span><span class="hl-0"> </span><span class="hl-3">&#39;US&#39;</span><span class="hl-0">}); </span><span class="hl-7">// Region argument is only required if you live outside the United States.</span>
 </code></pre>
 <ul>
 <li>Note: If your region is outside of the US you can pass different region parameters to the User
 class. Regions: (US, CA, EU, AU)</li>
 </ul>
-<p><br></br> Use <code>user.vehicles()</code> to return an array of all the vehicles associated with a users
-account. The response will include the <strong>vehicle vin</strong>.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">vehicles</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">user</span><span class="hl-0">.</span><span class="hl-6">vehicles</span><span class="hl-0">();</span><br/><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">vehicleList</span><span class="hl-0"> = []; </span><span class="hl-7">// Array of vehicles</span><br/><br/><span class="hl-1">for</span><span class="hl-0"> (</span><span class="hl-2">userVehicle</span><span class="hl-0"> </span><span class="hl-4">of</span><span class="hl-0"> </span><span class="hl-2">vehicles</span><span class="hl-0">) </span><span class="hl-7">// For each user vehicle</span><br/><span class="hl-0">  </span><span class="hl-2">vehicleList</span><span class="hl-0">.</span><span class="hl-6">push</span><span class="hl-0">(</span><span class="hl-2">userVehicle</span><span class="hl-0">[</span><span class="hl-3">&#39;vin&#39;</span><span class="hl-0">]);</span>
+<p>Use <code>client.getAccessTokenFromCredentials()</code> to exchange your user credentials for an <strong>token
+object</strong>. To make any vehicle data request to the Ford Sync Connect API, you&#39;ll need to give the SDK
+a valid <strong>access token</strong>.</p>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">token</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccessTokenFromCredentials</span><span class="hl-0">({</span><br/><span class="hl-0">  </span><span class="hl-2">username:</span><span class="hl-0"> </span><span class="hl-3">&#39;&lt;username&gt;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">  </span><span class="hl-2">password:</span><span class="hl-0"> </span><span class="hl-3">&#39;&lt;password&gt;&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
 </code></pre>
-<p><br></br> Now with a <strong>vehicle vin</strong> in hand, use <code>connectedcar.Vehicle()</code> to get a Vehicle object
+<p>Access tokens will expire every 2 hours, so you&#39;ll need to constantly refresh them by calling
+<code>client.getAccessTokenFromRefreshToken()</code></p>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">refreshToken</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">client</span><span class="hl-0">.</span><span class="hl-6">getAccessTokenFromRefreshToken</span><span class="hl-0">(</span><span class="hl-2">token</span><span class="hl-0">.</span><span class="hl-6">getRefreshToken</span><span class="hl-0">());</span>
+</code></pre>
+<p>With your access token in hand, use <code>connectedcar.User()</code> to get a User object representing the
+user.</p>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">user</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">User</span><span class="hl-0">(</span><span class="hl-2">token</span><span class="hl-0">.</span><span class="hl-6">getValue</span><span class="hl-0">());</span>
+</code></pre>
+<p>Use <code>user.vehicles()</code> to return an array of all the vehicles associated with a users account. The
+response will include the <strong>vehicle vin</strong>.</p>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">vehicles</span><span class="hl-0"> = </span><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">user</span><span class="hl-0">.</span><span class="hl-6">vehicles</span><span class="hl-0">();</span><br/><br/><span class="hl-4">const</span><span class="hl-0"> </span><span class="hl-5">vehicleList</span><span class="hl-0"> = []; </span><span class="hl-7">// Array of vehicles</span><br/><br/><span class="hl-1">for</span><span class="hl-0"> (</span><span class="hl-2">userVehicle</span><span class="hl-0"> </span><span class="hl-4">of</span><span class="hl-0"> </span><span class="hl-2">vehicles</span><span class="hl-0">) </span><span class="hl-7">// For each user vehicle</span><br/><span class="hl-0">  </span><span class="hl-2">vehicleList</span><span class="hl-0">.</span><span class="hl-6">push</span><span class="hl-0">(</span><span class="hl-2">userVehicle</span><span class="hl-0">[</span><span class="hl-3">&#39;VIN&#39;</span><span class="hl-0">]);</span>
+</code></pre>
+<p>Now with a <strong>vehicle vin</strong> in hand, use <code>connectedcar.Vehicle()</code> to get a Vehicle object
 representing the user&#39;s vehicle.</p>
-<pre><code class="language-javascript"><span class="hl-4">let</span><span class="hl-0"> </span><span class="hl-2">currentVehicle</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">Vehicle</span><span class="hl-0">(</span><span class="hl-2">vehicleList</span><span class="hl-0">[</span><span class="hl-8">0</span><span class="hl-0">], </span><span class="hl-2">token</span><span class="hl-0">.</span><span class="hl-6">getValue</span><span class="hl-0">(), </span><span class="hl-3">&#39;US&#39;</span><span class="hl-0">); </span><span class="hl-7">// Region argument is only required if you live outside the United States.</span>
+<pre><code class="language-javascript"><span class="hl-4">let</span><span class="hl-0"> </span><span class="hl-2">currentVehicle</span><span class="hl-0"> = </span><span class="hl-2">connectedcar</span><span class="hl-0">.</span><span class="hl-6">Vehicle</span><span class="hl-0">(</span><span class="hl-2">vehicleList</span><span class="hl-0">[</span><span class="hl-8">0</span><span class="hl-0">], </span><span class="hl-2">token</span><span class="hl-0">.</span><span class="hl-6">getValue</span><span class="hl-0">());</span>
 </code></pre>
-<ul>
-<li>Note: If your region is outside of the US you can pass different region parameters to the Vehicle
-class. Regions: (US, CA, EU, AU)</li>
-</ul>
-<p><br></br> Now you can ask the car to do things, or ask it for some data! For example:</p>
+<p>Now you can ask the car to do things, or ask it for some data! For example:</p>
 <pre><code class="language-javascript"><span class="hl-1">await</span><span class="hl-0"> </span><span class="hl-2">currentVehicle</span><span class="hl-0">.</span><span class="hl-6">start</span><span class="hl-0">();</span>
 </code></pre>
-<p><br></br></p>
 
 <a href="#examples-amp-documentation" id="examples-amp-documentation" style="color: inherit; text-decoration: none;">
-  <h1>Examples &amp; Documentation</h1>
+  <h2>Examples &amp; Documentation</h2>
 </a>
 <p>For more examples on what you can do with your ConnectedCar, see the <a href="/examples">examples</a> folder or
 take a peek at the <a href="https://ianjwhite99.github.io/connected-car-node-sdk/">documentation</a>.</p>
 
 <a href="#funding-amp-support" id="funding-amp-support" style="color: inherit; text-decoration: none;">
-  <h1>Funding &amp; Support</h1>
+  <h2>Funding &amp; Support</h2>
 </a>
 <p>If you are interested in supporting the development of my projects check out my
 <a href="https://www.patreon.com/ianjwhite99">patreon</a> or
 <a href="https://www.buymeacoffee.com/ianjwhite9">buy me a coffee</a>.</p>
 
 <a href="#disclaimer" id="disclaimer" style="color: inherit; text-decoration: none;">
-  <h1>Disclaimer</h1>
+  <h2>Disclaimer</h2>
 </a>
 <p>THIS CODEBASE IS NOT ENDORSED, AFFILIATED, OR ASSOCIATED WITH FORD, FOMOCO OR THE FORD MOTOR
 COMPANY.</p>
